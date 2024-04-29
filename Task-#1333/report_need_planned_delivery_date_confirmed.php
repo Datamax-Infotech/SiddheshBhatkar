@@ -39,7 +39,9 @@
 					$dt_view_qry .= "loop_transaction_buyer.good_to_ship AS G, loop_transaction_buyer.po_date AS H , loop_transaction_buyer.id AS I, loop_transaction_buyer.inv_date_of AS J FROM loop_transaction_buyer INNER JOIN loop_warehouse ON loop_transaction_buyer.warehouse_id = loop_warehouse.id ";
 					$dt_view_qry .= "WHERE loop_transaction_buyer.po_date <> '' and loop_transaction_buyer.ignore = 0 and good_to_ship = 0 and po_delivery_dt<>'' and ready_to_hand_off_ignore = 0 and loop_transaction_buyer.planned_delivery_dt_customer_confirmed=0 ORDER BY loop_transaction_buyer.id, loop_transaction_buyer.warehouse_id";
 					
-					$dt_view_res = db_query($dt_view_qry, db());
+					db();
+
+					$dt_view_res = db_query($dt_view_qry);
 					$srno = 0;
 
 					while ($dt_view_row = array_shift($dt_view_res)) {
