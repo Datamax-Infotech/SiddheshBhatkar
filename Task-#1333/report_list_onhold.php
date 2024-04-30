@@ -314,7 +314,7 @@
 								<td class='rowstyle center'><input onclick="remove_hold(<?php echo $row['ID'] ?>);" type="button" value="Remove Hold" /></td>
 							</tr>
 							<?php
-								$MGArray = array(
+								$MGArray[] = array(
 									'compid' => $row["ID"],
 									'company_name' => $nickname,
 									'haveNeed' => $row["haveNeed"],
