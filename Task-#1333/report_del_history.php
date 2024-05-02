@@ -1,10 +1,8 @@
 <?php
 	session_start();
-
 	require_once("inc/header_session.php");
-	require_once("mainfunctions/database.php");
-	require_once("mainfunctions/general-functions.php");
-	
+	require_once("../mainfunctions/database.php");
+	require_once("../mainfunctions/general-functions.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
