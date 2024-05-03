@@ -1,7 +1,7 @@
 <?php
   require("inc/header_session.php");
-  require("mainfunctions/database.php");
-  require("mainfunctions/general-functions.php"); 
+  require("../mainfunctions/database.php");
+  require("../mainfunctions/general-functions.php"); 
   ?>
 <!doctype html>
 <html>
