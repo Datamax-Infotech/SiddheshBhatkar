@@ -11,7 +11,7 @@
   	$sort_order_pre = "ASC";
   }
   
-  ?>
+?>
 <html>
   <head>
     <title>Client Retention Report - B2B Purchasing</title>
@@ -244,10 +244,6 @@
             
             			if ($inactive_company == "y") {
             
-            				/*$max_transaction_date = $main_row["max_transaction_date"];
-            
-            $dt = date('Y-m-d', strtotime($max_transaction_date));
-            $no_ofdays_todaysdt_lastorderdt = dateDiff($dt, $todays_dt);*/
             				//Sort date
             				if ($_REQUEST["order_dd"] == "2") {
             					$max_transaction_date = $main_row["max_transaction_date"];
@@ -266,7 +262,7 @@
             						$newflg = "yes";
             					}
             
-            					if ($no_ofdays_todaysdt_lastorderdt >= 20 && $Avergae_time == 0) {
+								if (intval($no_ofdays_todaysdt_lastorderdt) >= 20 && $Avergae_time != 0) {
             						$newflg = "yes";
             					}
             
@@ -353,7 +349,7 @@
             						$newflg = "yes";
             					}
             
-            					if ($no_ofdays_todaysdt_lastorderdt >= 20 && $Avergae_time == 0) {
+            					if (intval($no_ofdays_todaysdt_lastorderdt) >= 20 && $Avergae_time == 0) {
             						$newflg = "yes";
             					}
             
@@ -362,12 +358,7 @@
             
             					$dt_new = date('Y-m-d', strtotime($last_contact_dt));
             					$last_contact90day = dateDiff($dt_new, $todays_dt);
-            					//echo "Comp: ". $inv_row['company_name'] . " id:" . $compid . " " . $last_contact90day . "<br>";
-            					/*if($last_contact90day > 91)
-            	{		
-            		$newflg1 = "yes";
-            	}
-            */
+            	
             					if ($newflg == "yes") {
 									db_b2b();
             						$sql_comp = "Select companyInfo.company, assignedto, nickname, employees.name from companyInfo inner join employees on companyInfo.assignedto = employees.employeeID where ID = '" . $main_row["b2bid"] . "'";
@@ -449,7 +440,7 @@
             						$month_cnt = 36;
             					}
             
-            					if ($no_ofdays_todaysdt_lastorderdt >= (30 * $month_cnt)) {
+            					if (intval($no_ofdays_todaysdt_lastorderdt) >= (30 * $month_cnt)) {
             						$newflg = "yes";
             					}
             
@@ -691,8 +682,7 @@
             		if ($MGArraytmp2['last_contact_dt'] != "") {
             			$todays_dt = date('Y-m-d');
             			$cnt_date = str_replace(",", "", dateDiff($MGArraytmp2['last_contact_dt'], $todays_dt));
-            			//echo $MGArraytmp2['compid'] . " " . $MGArraytmp2['last_contact_dt'] . " " . $todays_dt . " | " . $cnt_date . "<br>";
-            			if ($cnt_date > 91) {
+						if (intval($cnt_date) > 91) {
             				$bgcolor = "red";
             				$last_contactdays = "(" . $cnt_date . " days ago)";
             			} else {
@@ -723,7 +713,7 @@
               <font size='2'><?php echo $MGArraytmp2["avg_time_order"]; ?></font>
             </td>
             <td align="right" bgcolor="#E4E4E4">
-              <font size='2'><?php echo $MGArraytmp2["no_days_n"]; ?></font>
+              <font size='2'><?php echo $MGArraytmp2["no_days_n"] ?? "N/A";  ?></font>
             </td>
             <td align="right" bgcolor="#E4E4E4">
               <font size='2'><?php echo $MGArraytmp2['rep_name']; ?></font>
