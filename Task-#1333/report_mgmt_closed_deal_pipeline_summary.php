@@ -567,7 +567,7 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(floatval(str_replace(",", "", $inv_amount)) - floatval(str_replace(",", "", $vendor_pay)), 2);
+					$profit_val = number_format(floatval(str_replace(",", "", strval($inv_amount))) - floatval(str_replace(",", "", strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
@@ -747,13 +747,13 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(floatval(str_replace(",", "", $inv_amount)) - floatval(str_replace(",", "", $vendor_pay)), 2);
+					$profit_val = number_format(floatval(str_replace(",", "", $inv_amount)) - floatval(str_replace(",", "", strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
 					
 					}
 						
@@ -848,7 +848,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -926,14 +926,14 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "" ,strval($inv_amount))) - floatval(str_replace(",", "" ,strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
-					//}else{
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
+					
 					}
 						
 					if($profit_val_per != ""){
@@ -1027,7 +1027,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -1105,14 +1105,14 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "" ,strval($inv_amount))) - floatval(str_replace(",", "" ,strval($vendor_pay))),2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
-					//}else{
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval(str_replace(",", "", $profit_val)) * 100) / floatval(str_replace(",", "", $inv_amount)));
+					
 					}
 						
 					if($profit_val_per != ""){
@@ -1206,7 +1206,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -1284,13 +1284,13 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format((float)str_replace(",", "" ,strval($inv_amount)) - (float)str_replace(",", "" ,strval($vendor_pay)),2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
+					if((float)$inv_amount > 0){
+						$profit_val_per = abs((float)$profit_val * 100 / (float)$inv_amount);
 					}
 						
 					if($profit_val_per != ""){
@@ -1383,7 +1383,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -1461,13 +1461,13 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "", strval($inv_amount))) - floatval(str_replace(",", "", strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval(str_replace(",", "", $profit_val)) * 100) / floatval(str_replace(",", "", $inv_amount)));
 					
 					}
 						
@@ -1565,7 +1565,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -1643,14 +1643,14 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "", strval($inv_amount))) - floatval(str_replace(",", "", strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
-					//}else{
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
+				
 					}
 					if($profit_val_per != ""){	
 						if ($profit_val_per >= 30){
@@ -1744,7 +1744,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -1823,13 +1823,13 @@
 						$inv_amount = $invoice_amt;
 					}
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "" ,strval($inv_amount))) - floatval(str_replace(",", "" ,strval($vendor_pay))),2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
 					
 					}
 						
@@ -1928,7 +1928,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + floatval($b2b_ovh_costDollar);
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -2007,14 +2007,13 @@
 					}
 
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
-					$profit_val = str_replace(",", "" , $profit_val);
+					$profit_val = number_format(floatval(str_replace(",", "" , $inv_amount)) - floatval(str_replace(",", "" , strval($vendor_pay))), 2);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
-					//}else{
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
+					
 					}
 						
 					if($profit_val_per != ""){
@@ -2109,7 +2108,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + floatval($b2b_ovh_costDollar);
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -2189,14 +2188,14 @@
 					}
 
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "" ,strval($inv_amount))) - floatval(str_replace(",", "" ,strval($vendor_pay))),2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
-					//}else{
+					if(floatval($inv_amount) > 0){
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
+					
 					}
 						
 					if($profit_val_per != ""){
@@ -2292,7 +2291,7 @@
 								$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 								$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 								
-								$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+								$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 								$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 								$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -2376,13 +2375,14 @@
 					}
 
 
-					$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+					$profit_val = number_format(floatval(str_replace(",", "" , strval($inv_amount))) - floatval(str_replace(",", "" , strval($vendor_pay))), 2);
 					$profit_val = str_replace(",", "" , $profit_val);
 					$inv_amount = str_replace(",", "" , $inv_amount);
 
 					$profit_val_per = "";
-					if($inv_amount > 0){
-						$profit_val_per = abs(($profit_val * 100)/$inv_amount);
+					if(intval($inv_amount) > 0){
+						$inv_amount = floatval($inv_amount);
+						$profit_val_per = abs((floatval($profit_val) * 100) / floatval($inv_amount));
 					
 					}
 						
@@ -2508,7 +2508,7 @@
 									$b2b_ovh_costDollar = round($box_data_res["overhead_costDollar"]);
 									$b2b_ovh_costCents = $box_data_res["overhead_costCents"];
 									
-									$b2b_costDollar = $boxgoodvalueDollar + $b2b_ovh_costDollar;
+									$b2b_costDollar = floatval($boxgoodvalueDollar) + $b2b_ovh_costDollar;
 									$b2b_costCents = $boxgoodvalueCents + $b2b_ovh_costCents;
 
 									$b2b_cost = $b2b_costDollar+$b2b_costCents;
@@ -2588,7 +2588,7 @@
 						}
 
 
-						$profit_val = number_format(str_replace(",", "" ,$inv_amount) - str_replace(",", "" ,$vendor_pay),2);
+						$profit_val = number_format(floatval(str_replace(",", "" ,strval($inv_amount))) - floatval(str_replace(",", "" ,strval($vendor_pay))),2);
 						$profit_val = str_replace(",", "" , $profit_val);
 						$inv_amount = str_replace(",", "" , $inv_amount);
 
