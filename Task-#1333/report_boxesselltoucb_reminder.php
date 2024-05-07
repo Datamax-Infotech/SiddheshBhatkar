@@ -1,5 +1,5 @@
 <?php
-  session_start();
+
   require("inc/header_session.php");
   require("../mainfunctions/database.php");
   require("../mainfunctions/general-functions.php");
@@ -11,7 +11,7 @@
   	$sort_order_pre = "ASC";
   }
   
-?>
+  ?>
 <html>
   <head>
     <title>Client Retention Report - B2B Purchasing</title>
@@ -68,13 +68,13 @@
     <?php include("inc/header.php"); ?>
     <div class="main_data_css">
       <?php
-	    db();
-        $user_qry = "SELECT id from loop_employees where level = 2 and initials = '" . $_COOKIE['userinitials'] . "'";
-        $user_res = db_query($user_qry);
-        while ($user_row = array_shift($user_res)) {
-        	echo "<br>&nbsp;&nbsp;<a href='cron_save_selltoucb_reminder.php?showrep=yes'>Re-Run the Cron Job</a>";
-        }
-        ?>
+			db();
+           $user_qry = "SELECT id from loop_employees where level = 2 and initials = '" . $_COOKIE['userinitials'] . "'";
+           $user_res = db_query($user_qry);
+           while ($user_row = array_shift($user_res)) {
+           	echo "<br>&nbsp;&nbsp;<a href='cron_save_selltoucb_reminder.php?showrep=yes'>Re-Run the Cron Job</a>";
+           }
+           ?>
       <div class="dashboard_heading" style="float: left;">
         <div style="float: left;">
           Client Retention Report - B2B Purchasing
@@ -129,13 +129,12 @@
         </form>
       </div>
       <?php
-        
         if ((isset($_REQUEST["btnsubmit"])) || (isset($_REQUEST["sort_fld"]))) {
         
         	if (!isset($_REQUEST["sort_fld"]) && isset($_SESSION["sortarrayn"])) {
         
         		$rname = "report_boxesselltoucb_purchase" . $_REQUEST['order_dd'];
-				db();
+        		db();
         		$query = "SELECT report_cache_str, sync_time from reports_cache where report_name = '" . $rname . "'";
         		$res = db_query($query);
         		while ($row = array_shift($res)) {
@@ -203,7 +202,7 @@
             	//$_SESSION['sortarrayn'] ="";
             
             	if ($_REQUEST["order_dd"] != "7") {
-					db();
+           	 		db();
             		$res_main = db_query("Select id, b2bid , warehouse_name, average_order_days, max_transaction_date, last_sort_date, max_transaction_cnt from loop_warehouse 
             where rec_type = 'Manufacturer' and Active = 1 and max_transaction_cnt > 1 and b2bid > 0 and average_order_days > 0 and (last_sort_date is not null and last_sort_date <> '0000-00-00') order by company_name");
             		while ($main_row = array_shift($res_main)) {
@@ -219,7 +218,7 @@
             			$status_owner = 0;
             			$acc_status = "";
             			$company_final = "";
-						db_b2b();
+           				 db_b2b();
             			$sql_comp = "Select ID, contact, sellto_main_line_ph, email, last_contact_date, next_step, next_date, company, 
             status, active, nickname from companyInfo where  active = 1 and status not in (31, 24, 49) and ID = " . $main_row["b2bid"];
             			$dt_view_res = db_query($sql_comp);
@@ -262,7 +261,7 @@
             						$newflg = "yes";
             					}
             
-								if (intval($no_ofdays_todaysdt_lastorderdt) >= 20 && $Avergae_time != 0) {
+            if (intval($no_ofdays_todaysdt_lastorderdt) >= 20 && $Avergae_time != 0) {
             						$newflg = "yes";
             					}
             
@@ -279,7 +278,7 @@
             					if ($newflg == "yes" && $newflg1 == "yes") {
             
             				
-									db_b2b();
+            						db_b2b();
             						$sql_comp = "Select companyInfo.company, assignedto, nickname, employees.name from companyInfo inner join employees on companyInfo.assignedto = employees.employeeID where ID = '" . $main_row["b2bid"] . "'";
             						$dt_view_res = db_query($sql_comp);
             						$emp_name = "";
@@ -292,7 +291,7 @@
             								$newcompany = $row_comp['nickname'];
             							}
             						}
-									db_b2b();
+            						db_b2b();
             						$status = "Select * from status where id = " . $status_owner;
             						$dt_view_res4 = db_query($status);
             						while ($objStatus = array_shift($dt_view_res4)) {
@@ -360,7 +359,7 @@
             					$last_contact90day = dateDiff($dt_new, $todays_dt);
             	
             					if ($newflg == "yes") {
-									db_b2b();
+            						db_b2b();
             						$sql_comp = "Select companyInfo.company, assignedto, nickname, employees.name from companyInfo inner join employees on companyInfo.assignedto = employees.employeeID where ID = '" . $main_row["b2bid"] . "'";
             						$dt_view_res = db_query($sql_comp);
             						$emp_name = "";
@@ -373,7 +372,7 @@
             								$newcompany = $row_comp['nickname'];
             							}
             						}
-									db_b2b();
+            						db_b2b();
             						$status = "Select * from status where id = " . $status_owner;
             						$dt_view_res4 = db_query($status);
             						while ($objStatus = array_shift($dt_view_res4)) {
@@ -382,7 +381,7 @@
             
             						$tot_orders = $main_row["max_transaction_cnt"];
             				
-									db();
+           							db();
             						$comp_res = db_query("Select sum(estimated_revenue) as rev_amount from loop_transaction where loop_transaction.ignore = 0 and warehouse_id = " . $main_row["id"]);
             						while ($comp_row = array_shift($comp_res)) {
             							$tot_orders_val = $comp_row["rev_amount"];
@@ -452,7 +451,7 @@
             					//echo "Comp: ". $main_row["b2bid"] . " " . $no_ofdays_todaysdt_lastorderdt . "<br>";
             
             					if ($newflg == "yes") {
-									db_b2b();
+            						db_b2b();
             						$sql_comp = "Select companyInfo.company, assignedto, nickname, employees.name from companyInfo inner join employees on companyInfo.assignedto = employees.employeeID where ID = '" . $main_row["b2bid"] . "'";
             						$dt_view_res = db_query($sql_comp);
             						$emp_name = "";
@@ -465,7 +464,7 @@
             								$newcompany = $row_comp['nickname'];
             							}
             						}
-									db_b2b();
+            						db_b2b();
             						$status = "Select * from status where id = " . $status_owner;
             						$dt_view_res4 = db_query($status);
             						while ($objStatus = array_shift($dt_view_res4)) {
@@ -473,7 +472,7 @@
             						}
             
             						$tot_orders = $main_row["max_transaction_cnt"];
-									db();
+            						db();
             						$comp_res = db_query("Select sum(estimated_revenue) as rev_amount from loop_transaction where loop_transaction.ignore = 0 and warehouse_id = " . $main_row["id"]);
             						while ($comp_row = array_shift($comp_res)) {
             							$tot_orders_val = $comp_row["rev_amount"];
@@ -518,7 +517,7 @@
             			$data_found = "no";
             			$current_yr_revenue = 0;
             			$rev_current_yr_flg = 0;
-						db_b2b();
+            			db_b2b();
             			$sql_comp = "Select revenue from company_year_revenue_g_profit where trans_year = '" . date("Y") . "' and b2bid = " . $main_row["b2bid"];
             			$dt_view_res = db_query($sql_comp);
             			while ($row_comp = array_shift($dt_view_res)) {
@@ -536,7 +535,7 @@
             			// New logic as per Zac Step 1, find max Step 2, month avg  Step 3, this yr avg Step 4, compare Show on table?
             			if ($newflg == "no") {
             				$maxrevenue = 0;
-							db_b2b();
+           					 db_b2b();
             				$sql_comp = "Select max(revenue) as maxrevenue from company_year_revenue_g_profit where b2bid = " . $main_row["b2bid"];
             				$dt_view_res = db_query($sql_comp);
             				while ($row_comp = array_shift($dt_view_res)) {
@@ -567,7 +566,7 @@
             				$status_owner = 0;
             				$acc_status = "";
             				$company_final = "";
-							db_b2b();
+            				db_b2b();
             				$sql_comp = "Select ID, contact, sellto_main_line_ph, email, last_contact_date, next_step, next_date, company, 
             status, active, nickname from companyInfo where active = 1 and ID = " . $main_row["b2bid"];
             				$dt_view_res = db_query($sql_comp);
@@ -595,7 +594,7 @@
             					$tot_orders_val = 0;
             					$average_order_days = "";
             					$loop_id = 0;
-								db();
+            					db();
             					$sql_comp = "Select id, b2bid , warehouse_name, average_order_days, max_transaction_date, last_delivery_date, max_transaction_cnt from loop_warehouse 
             where b2bid = '" . $main_row["b2bid"] . "'";
             					$dt_view_res = db_query($sql_comp);
@@ -631,7 +630,7 @@
             							$newcompany = $row_comp['nickname'];
             						}
             					}
-								db_b2b();
+            					db_b2b();
             					$status = "Select * from status where id = " . $status_owner;
             					$dt_view_res4 = db_query($status);
             					while ($objStatus = array_shift($dt_view_res4)) {
@@ -646,7 +645,7 @@
             					} else {
             						$no_ofdays_todaysdt_lastorderdt = $no_ofdays_todaysdt_lastorderdt . " days overdue";
             					}
-								db();
+            					db();
             					$comp_res = db_query("Select sum(estimated_revenue) as rev_amount from loop_transaction where loop_transaction.ignore = 0 and warehouse_id = " . $loop_id);
             					while ($comp_row = array_shift($comp_res)) {
             						$tot_orders_val = $comp_row["rev_amount"];
@@ -682,7 +681,7 @@
             		if ($MGArraytmp2['last_contact_dt'] != "") {
             			$todays_dt = date('Y-m-d');
             			$cnt_date = str_replace(",", "", dateDiff($MGArraytmp2['last_contact_dt'], $todays_dt));
-						if (intval($cnt_date) > 91) {
+            if (intval($cnt_date) > 91) {
             				$bgcolor = "red";
             				$last_contactdays = "(" . $cnt_date . " days ago)";
             			} else {
@@ -730,7 +729,7 @@
             </td>
             <td bgcolor="#E4E4E4" align="center" width="250px">
               <font size='2'>
-                <?php echo $MGArraytmp2["next_step"]; ?>
+              <?php echo $MGArraytmp2["next_step"]; ?>
               </font>
             </td>
             <td bgcolor="#E4E4E4" align="center">
@@ -1030,7 +1029,7 @@
             </td>
             <td bgcolor="#E4E4E4" align="center" width="250px">
               <font size='2'>
-                <?php echo $MGArraytmp2["next_step"]; ?>
+              <?php echo $MGArraytmp2["next_step"]; ?>
               </font>
             </td>
             <td bgcolor="#E4E4E4" align="center">
@@ -1041,7 +1040,7 @@
                 } ?></font>
             </td>
           </tr>
-          <?
+          <?php
             $cnt_no = $cnt_no + 1;
             }
             }
