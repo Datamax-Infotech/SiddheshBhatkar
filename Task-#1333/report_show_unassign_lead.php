@@ -1,7 +1,7 @@
 <?php
 	require ("inc/header_session.php");
-	require ("mainfunctions/database.php");
-	require ("mainfunctions/general-functions.php");
+	require ("../mainfunctions/database.php");
+	require ("../mainfunctions/general-functions.php");
 	require ("functions_for_report_search_table.php");
 
 ?>
