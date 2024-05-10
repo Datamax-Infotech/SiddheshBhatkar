@@ -1,6 +1,4 @@
 <?php
-	error_reporting(1);
-    ini_set('error_reporting','E_ALL');
 	require ("inc/header_session.php");
 	require ("../mainfunctions/database.php");
 	require ("../mainfunctions/general-functions.php");
