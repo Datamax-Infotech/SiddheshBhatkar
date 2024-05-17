@@ -1,0 +1,21 @@
+ucbemail@usedcardboardboxes.com
+
+ucbmooneem@usedcardboardboxes.com
+
+https://www.youtube.com/watch?v=281jK7rj-XQ&pp=ygULa29rYW4ga29rYW4%3D
+
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
+
+PHP Migration Done
+ ereg_replace
+
+Hi sir,
+
+Completed 5 files today with variable undefined error solved. Same has been updated in google sheet with date lines of code.
+
+Now leaving for the day.
+
+Best Regards
+
+Default SSN - 4652
